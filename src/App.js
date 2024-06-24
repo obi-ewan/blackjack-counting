@@ -23,15 +23,7 @@ function App() {
   return (
       <div className="App">
         <header className="App-header">
-          <h1>Card Counting App</h1>
-          <div>
-            <button onClick={() => addCount(1)}>+1 (2-6)</button>
-            <button onClick={() => addCount(0)}>0 (7-9)</button>
-            <button onClick={() => addCount(-1)}>-1 (10-Ace)</button>
-          </div>
-          <h2>Running Count: <span>{count}</span></h2>
-          <h2>True Count: <span>{(count / decks).toFixed(2)}</span></h2>
-          <div>
+          <div className="decks-input">
             <label>
               Number of Decks:
               <input
@@ -43,7 +35,21 @@ function App() {
               />
             </label>
           </div>
-          <button onClick={resetCount}>Reset</button>
+          <div className="content">
+            <div className="image-container">
+              <img src={`${process.env.PUBLIC_URL}/strategy.png`} alt="Basic Strategy Chart" />
+            </div>
+            <div className="card-counting">
+              <div>
+                <button onClick={() => addCount(1)}>+1 (2-6)</button>
+                <button onClick={() => addCount(0)}>0 (7-9)</button>
+                <button onClick={() => addCount(-1)}>-1 (10-Ace)</button>
+              </div>
+              <h2>Running Count: <span>{count}</span></h2>
+              <h2>True Count: <span>{(count / decks).toFixed(2)}</span></h2>
+              <button onClick={resetCount}>Reset</button>
+            </div>
+          </div>
         </header>
       </div>
   );
