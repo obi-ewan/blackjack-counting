@@ -13,6 +13,13 @@ function App() {
     setCount(0);
   };
 
+  const handleDeckChange = (event) => {
+    const newDecks = parseInt(event.target.value, 10);
+    if (newDecks >= 1) {
+      setDecks(newDecks);
+    }
+  };
+
   return (
       <div className="App">
         <header className="App-header">
@@ -24,6 +31,18 @@ function App() {
           </div>
           <h2>Running Count: <span>{count}</span></h2>
           <h2>True Count: <span>{(count / decks).toFixed(2)}</span></h2>
+          <div>
+            <label>
+              Number of Decks:
+              <input
+                  type="number"
+                  value={decks}
+                  onChange={handleDeckChange}
+                  min="1"
+                  style={{ marginLeft: '10px', width: '50px' }}
+              />
+            </label>
+          </div>
           <button onClick={resetCount}>Reset</button>
         </header>
       </div>
