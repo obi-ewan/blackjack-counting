@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
   const [decks, setDecks] = useState(1);
 
   const addCount = (value) => {
-    setCount(count + value);
+    setCount(prevCount => prevCount + value);
   };
 
   const resetCount = () => {
@@ -19,6 +19,21 @@ function App() {
       setDecks(newDecks);
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowLeft') {
+      addCount(1); // +1 (2-6)
+    } else if (event.key === 'ArrowRight') {
+      addCount(-1); // -1 (10-Ace)
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
       <div className="App">
@@ -41,12 +56,12 @@ function App() {
             </div>
             <div className="card-counting">
               <div>
-                <button onClick={() => addCount(1)}>+1 (2-6)</button>
-                <button onClick={() => addCount(0)}>0 (7-9)</button>
-                <button onClick={() => addCount(-1)}>-1 (10-Ace)</button>
+                <button onClick={() => addCount(1)}>2-6 (+1)</button>
+                <button disabled>7-9 (0)</button>
+                <button onClick={() => addCount(-1)}>10-Ace (-1)</button>
               </div>
-              <h2>Running Count: <span>{count}</span></h2>
               <h2>True Count: <span>{(count / decks).toFixed(2)}</span></h2>
+              <h5>Running Count: <span>{count}</span></h5>
               <button onClick={resetCount}>Reset</button>
             </div>
           </div>
