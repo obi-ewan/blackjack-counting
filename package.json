@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://obi-ewan.github.io/blackjack-counting"
+  "homepage": "https://obi-ewan.github.io/blackjack-counting",
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  }
 }
